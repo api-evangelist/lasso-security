@@ -1,0 +1,96 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Lasso Security
+providerId: lasso-security
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- GenAI Security
+- Guardrails
+- MCP
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Lasso Security spend. Lasso is sold as a sales-led, subscription
+  GenAI security platform; pricing is not publicly published, so per-unit rates
+  are not reconciled. Cost is driven by platform subscription tier plus
+  classification volume (prompt/completion checks via /classify and /classifix)
+  across protected LLM applications and MCP servers. The open-source MCP Gateway
+  is free, but its Lasso guardrail plugin consumes platform classification usage.
+notes: >-
+  Obtain the subscription tier, included volume, and any per-classification
+  overage rates from Lasso sales; verify on reconciliation.
+sources:
+- https://www.lasso.security/
+- https://app.lasso.security/
+- https://github.com/lasso-security/mcp-gateway
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Lasso Security
+serviceCategory: Security
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+focusColumns:
+  ServiceName: Lasso GenAI Security Platform
+  ServiceCategory: Security
+  ProviderName: Lasso Security
+  PublisherName: Lasso Security
+  InvoiceIssuerName: Lasso Security
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: platform_subscription
+  description: Recurring platform subscription fee by tier; not publicly published.
+  unit: subscription
+  aggregation: max
+  dimensions:
+  - account
+  - plan
+- name: classifications
+  description: Prompt/completion classification calls (/classify, /classifix) against protected apps and agents.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - deputy
+  - messageType
+- name: pii_masking
+  description: Classification calls that return PII-masked content via /classifix.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+- name: protected_endpoints
+  description: Number of LLM applications / MCP servers protected by the Deputy gateway.
+  unit: endpoints
+  aggregation: max
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Use the Lasso dashboard audit trail to track classification volume and findings per app, agent, and deputy.
+- name: Allocation
+  description: Tag API keys and conversation/session IDs per workload or team to map classification spend to cost centers.
+- name: Optimization
+  description: Scope classification to high-risk surfaces; use the free open-source MCP Gateway secret/PII plugins where advanced guardrails are not required.
+- name: Accountability
+  description: Assign owners per protected application; review subscription tier and classification volume against budget on renewal.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

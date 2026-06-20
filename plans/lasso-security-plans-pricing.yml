@@ -1,0 +1,100 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Lasso Security
+providerId: lasso-security
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- GenAI Security
+- Prompt Injection
+- Guardrails
+- MCP
+- Plans
+description: >-
+  Lasso Security is sold as an enterprise GenAI security platform with sales-led,
+  subscription-based pricing that varies by features, usage, and organization
+  size. There is no public, self-service per-call price list for the Classify /
+  Threat Detection API or the Deputy gateway. The open-source MCP Gateway is free
+  (MIT) but its advanced Lasso guardrail plugin requires a Lasso API key tied to a
+  Lasso plan. Specific tier names and prices are not reconciled in this artifact.
+notes: >-
+  Pricing is not publicly published; tiers and rates must be obtained from Lasso
+  sales and verified on reconciliation.
+sources:
+- https://www.lasso.security/
+- https://app.lasso.security/
+- https://github.com/lasso-security/mcp-gateway
+plans:
+- id: lasso-mcp-gateway-oss
+  name: MCP Gateway (Open Source)
+  type: free
+  description: >-
+    Free, MIT-licensed open-source MCP Gateway with basic secret masking and
+    Presidio PII plugins. The Lasso advanced guardrail plugin requires a Lasso
+    API key from a paid plan.
+  entries:
+  - label: Open Source MCP Gateway
+    name: mcp_gateway_oss
+    type: flat
+    metric: license
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (MIT)
+    userMultiplied: false
+  elements:
+  - name: Secret Masking
+  - name: PII Detection (Presidio)
+  - name: Security Scanner
+- id: lasso-platform
+  name: Platform Subscription
+  type: subscription
+  description: >-
+    Subscription access to the Lasso GenAI security platform - Classify / Threat
+    Detection API, LLM Gateway (Deputy), discovery, monitoring, and audit -
+    priced by features, usage, and organization size. Contact Lasso sales.
+  entries:
+  - label: Platform Subscription
+    name: platform_subscription
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Classify / Threat Detection API
+  - name: LLM Gateway (Deputy)
+  - name: GenAI Discovery and Monitoring
+  - name: Audit Trail
+- id: lasso-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Enterprise agreements with advanced options, extended coverage, custom
+    policies, dedicated support, and negotiated terms. Contact Lasso sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Policies
+  - name: Extended Coverage
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

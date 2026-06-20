@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Lasso Security
+providerId: lasso-security
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- GenAI Security
+- Guardrails
+- MCP
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Lasso Security does not publish specific public rate limits for the Classify /
+  Threat Detection API or the Deputy gateway. Limits are governed by the
+  subscribed plan and enterprise agreement. Clients pass a per-request timeout
+  (default 5000 ms) on classification calls. Standard HTTP throttling (429) is
+  expected on overuse. Specific per-account values are not reconciled in this
+  artifact.
+notes: >-
+  Confirm concurrency, per-minute, and per-account limits with Lasso on
+  reconciliation; values depend on the plan and contract.
+sources:
+- https://www.lasso.security/
+- https://docs.litellm.ai/docs/proxy/guardrails/lasso_security
+- https://github.com/lasso-security/mcp-gateway
+responseCodes:
+  throttled: 429
+limits:
+- name: Per-Account Requests
+  scope: account
+  metric: requests
+  limit: see provider / contract
+  notes: Governed by plan and enterprise agreement; not publicly published.
+- name: Request Timeout
+  scope: request
+  metric: milliseconds
+  limit: 5000 default
+  notes: Client-supplied classification timeout in milliseconds; default 5000 ms.
+- name: Concurrency
+  scope: account
+  metric: concurrent_requests
+  limit: see provider / contract
+  notes: Concurrent classification throughput set by plan; not publicly published.
+policies:
+- name: Plan-Based Limits
+  description: Throughput and quotas scale with the subscribed Lasso plan and enterprise terms.
+- name: Timeout Handling
+  description: Classification requests honor a per-call timeout (default 5000 ms); callers should fail open or closed per their policy.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

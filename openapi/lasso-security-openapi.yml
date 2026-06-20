@@ -1,0 +1,218 @@
+openapi: 3.0.1
+info:
+  title: Lasso Security Classify / Threat Detection API
+  description: >-
+    REST API for Lasso Security's GenAI guardrails. The Classify endpoint scores
+    LLM prompts and completions for security violations - prompt injection,
+    jailbreaks, harmful content, custom policies, and PII - and returns structured
+    findings ("deputies") with action levels (BLOCK, WARN, AUTO_MASKING) and
+    severity. The Classifix endpoint additionally returns PII-masked messages.
+    Endpoints and field names are derived from public integrations (LiteLLM,
+    Portkey) and the open-source Lasso MCP Gateway; consult Lasso for the
+    authoritative reference.
+  termsOfService: https://www.lasso.security/
+  contact:
+    name: Lasso Security
+    url: https://www.lasso.security/
+  version: '3.0'
+servers:
+  - url: https://server.lasso.security/gateway/v3
+    description: Lasso Security v3 gateway
+security:
+  - LassoApiKey: []
+paths:
+  /classify:
+    post:
+      operationId: classify
+      tags:
+        - Classify
+      summary: Classify messages for security violations.
+      description: >-
+        Submit an array of chat messages (a prompt or a completion) for
+        real-time security classification. Returns whether violations were
+        detected along with per-deputy findings and action levels.
+      parameters:
+        - name: lasso-user-id
+          in: header
+          required: false
+          description: Optional end-user identifier for tracking and attribution.
+          schema:
+            type: string
+        - name: lasso-conversation-id
+          in: header
+          required: false
+          description: ULID grouping related calls within one conversation/session.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassifyRequest'
+      responses:
+        '200':
+          description: Classification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassifyResponse'
+        '401':
+          description: Missing or invalid API key.
+        '422':
+          description: Invalid request payload.
+        '429':
+          description: Rate limit exceeded.
+  /classifix:
+    post:
+      operationId: classifix
+      tags:
+        - Classify
+        - Masking
+      summary: Classify messages and return PII-masked content.
+      description: >-
+        Behaves like /classify but, when violations such as PII are detected and
+        masking is enabled, also returns a masked copy of the input messages with
+        sensitive values (emails, phone numbers, secrets, etc.) replaced by
+        placeholders.
+      parameters:
+        - name: lasso-user-id
+          in: header
+          required: false
+          description: Optional end-user identifier for tracking and attribution.
+          schema:
+            type: string
+        - name: lasso-conversation-id
+          in: header
+          required: false
+          description: ULID grouping related calls within one conversation/session.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassifyRequest'
+      responses:
+        '200':
+          description: Classification result with masked messages.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassifixResponse'
+        '401':
+          description: Missing or invalid API key.
+        '422':
+          description: Invalid request payload.
+        '429':
+          description: Rate limit exceeded.
+components:
+  securitySchemes:
+    LassoApiKey:
+      type: apiKey
+      in: header
+      name: lasso-api-key
+      description: Lasso API key issued from the Lasso dashboard (app.lasso.security).
+  schemas:
+    Message:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          type: string
+          description: Role of the message author.
+          enum:
+            - system
+            - user
+            - assistant
+            - tool
+        content:
+          type: string
+          description: Message text to be classified.
+    ClassifyRequest:
+      type: object
+      required:
+        - messages
+      properties:
+        messages:
+          type: array
+          description: Ordered array of chat messages to classify.
+          items:
+            $ref: '#/components/schemas/Message'
+        messageType:
+          type: string
+          description: Whether the payload represents a prompt or a completion.
+          enum:
+            - PROMPT
+            - COMPLETION
+        userId:
+          type: string
+          description: Optional end-user identifier.
+        sessionId:
+          type: string
+          description: Conversation/session identifier (ULID).
+        tools:
+          type: array
+          description: Optional tool / function definitions associated with the request.
+          items:
+            type: object
+            additionalProperties: true
+    Finding:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the specific finding.
+        category:
+          type: string
+          description: High-level category of the finding (e.g., SAFETY).
+        action:
+          type: string
+          description: Recommended enforcement action.
+          enum:
+            - BLOCK
+            - WARN
+            - AUTO_MASKING
+        severity:
+          type: string
+          description: Severity of the finding.
+          enum:
+            - LOW
+            - MEDIUM
+            - HIGH
+    ClassifyResponse:
+      type: object
+      properties:
+        violations_detected:
+          type: boolean
+          description: True if one or more violations were detected.
+        deputies:
+          type: object
+          description: >-
+            Map of deputy (detector) name to a boolean indicating whether that
+            deputy fired - e.g. jailbreak, custom-policies, sexual, hate,
+            illegality, codetect, violence, pattern-detection.
+          additionalProperties:
+            type: boolean
+        findings:
+          type: object
+          description: Map of deputy name to an array of structured findings.
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Finding'
+    ClassifixResponse:
+      allOf:
+        - $ref: '#/components/schemas/ClassifyResponse'
+        - type: object
+          properties:
+            messages:
+              type: array
+              description: >-
+                Masked copy of the input messages with PII / sensitive values
+                replaced by placeholders (present when masking applied).
+              items:
+                $ref: '#/components/schemas/Message'

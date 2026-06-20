@@ -1,0 +1,73 @@
+aid: lasso-security
+name: Lasso Security
+review:
+  question: Does Lasso Security expose a documented public WebSocket or streaming API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Lasso Security's classification surface is
+    a synchronous request/response REST API (POST /classify, POST /classifix)
+    over HTTPS. No Server-Sent Events (SSE), WebSocket, or other event-driven /
+    streaming transport is documented for the Classify / Threat Detection API,
+    the Deputy gateway, or the MCP Gateway, so there is no in-scope async
+    surface to model.
+findings:
+  summary: |
+    Lasso Security does not publish a documented public WebSocket or streaming
+    API. The developer surface is a synchronous REST gateway at
+    https://server.lasso.security/gateway/v3 with two documented operations -
+    POST /classify (security classification of LLM prompts/completions) and
+    POST /classifix (classification plus PII masking) - authenticated with a
+    lasso-api-key header. The LLM Gateway (Deputy) and the open-source MCP
+    Gateway both consume this same synchronous classify engine; the MCP Gateway
+    speaks the Model Context Protocol (JSON-RPC) to local/remote MCP servers but
+    does not expose a public HTTP streaming API of its own. No realtime,
+    bidirectional, SSE, or WebSocket endpoint is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://server.lasso.security/gateway/v3
+      documented: true
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events streaming surface is documented for any Lasso API.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented for the classify API, Deputy gateway, or MCP gateway.
+  endpointsConfirmedRest:
+    - POST https://server.lasso.security/gateway/v3/classify
+    - POST https://server.lasso.security/gateway/v3/classifix
+  notes: |
+    Endpoint paths and request/response field names are corroborated by public
+    integrations - LiteLLM and Portkey guardrail docs - and the open-source
+    Lasso MCP Gateway, which calls the v3 classify API. Lasso does not host a
+    public, self-service API reference portal; the authoritative reference is
+    available to Lasso customers.
+sources:
+  - url: https://www.lasso.security/platform/lasso-for-applications
+    type: Documentation
+    note: Describes the Deputy gateway deployed via Gateway, API, or SDK; no streaming transport mentioned.
+  - url: https://docs.litellm.ai/docs/proxy/guardrails/lasso_security
+    type: APIReference
+    note: Documents base URL, lasso-api-key header, /classify and /classifix POST endpoints, and response fields (violations_detected, deputies, findings).
+  - url: https://portkey.ai/docs/integrations/guardrails/lasso
+    type: APIReference
+    note: Documents the Classifier (messages, conversationId, userId, timeout) and Scan Content checks; synchronous REST only.
+  - url: https://github.com/lasso-security/mcp-gateway
+    type: Documentation
+    note: Open-source (MIT, Python) MCP Gateway using the Lasso v3 classify API; MCP/JSON-RPC to servers, no public HTTP streaming API.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE protocol surface exists for Lasso Security. The catalog
+    models only the documented synchronous REST classification API via OpenAPI;
+    no AsyncAPI artifact was authored because no event-driven or streaming
+    transport is documented.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
