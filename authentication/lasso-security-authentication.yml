@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/lasso-security-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: LassoApiKey
+  type: apiKey
+  in: header
+  parameter: lasso-api-key
+  description: Lasso API key issued from the Lasso dashboard (app.lasso.security).
+  sources:
+  - openapi/lasso-security-openapi.yml

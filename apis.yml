@@ -85,6 +85,10 @@ apis:
     and PII, block prompt injection, scan server reputation, and enforce custom policies via
     the Lasso v3 classify API using a LASSO_API_KEY.
 common:
+- type: DomainSecurity
+  url: security/lasso-security-domain-security.yml
+- type: Authentication
+  url: authentication/lasso-security-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/lasso-security
 - type: LinkedIn
@@ -99,6 +103,8 @@ common:
   url: rate-limits/lasso-security-rate-limits.yml
 - type: FinOps
   url: finops/lasso-security-finops.yml
+- type: Blog
+  url: https://www.lasso.security/blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
