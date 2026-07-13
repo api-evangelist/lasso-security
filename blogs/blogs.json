@@ -1,0 +1,14 @@
+{
+  "repo": "lasso-security",
+  "feeds": [
+    {
+      "source": "https://www.lasso.security/blog",
+      "feed_url": "https://www.lasso.security/blog",
+      "title": "Lasso Security Blog",
+      "saved": 0,
+      "error": "parse_failed"
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 8
+}
