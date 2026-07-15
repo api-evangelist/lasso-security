@@ -85,6 +85,8 @@ apis:
     and PII, block prompt injection, scan server reputation, and enforce custom policies via
     the Lasso v3 classify API using a LASSO_API_KEY.
 common:
+- type: AgenticAccess
+  url: agentic-access/lasso-security-agentic-access.yml
 - type: DomainSecurity
   url: security/lasso-security-domain-security.yml
 - type: Authentication
