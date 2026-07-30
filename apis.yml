@@ -7,7 +7,20 @@ description: Lasso Security is a GenAI security platform that protects every LLM
   and the Classify / Threat Detection API scores prompts and completions for prompt
   injection, jailbreaks, PII, and harmful content, returning structured BLOCK / WARN
   / AUTO_MASKING findings.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lasso-security.png
 tags:
 - AI
 - LLM
@@ -19,71 +32,52 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: lasso-security:classify-threat-detection-api
-  name: Lasso Classify / Threat Detection API
+- aid: lasso-security:lasso-security-classify-api
+  name: Lasso Security Classify API
+  description: The Classify API from Lasso Security — 2 operation(s) for classify.
+  humanURL: https://www.lasso.security/platform/lasso-for-applications
+  baseURL: https://server.lasso.security/gateway/v3
   tags:
   - Classify
-  - Threat Detection
-  - Guardrails
-  - PII
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/lasso-security-classify-api-openapi.yml
+  - type: Documentation
+    url: https://www.lasso.security/platform/lasso-for-applications
+  - type: APIReference
+    url: https://docs.litellm.ai/docs/proxy/guardrails/lasso_security
+  - type: PostmanCollection
+    url: collections/lasso-security.postman_collection.json
+  - type: OpenCollection
+    url: collections/lasso-security.opencollection.json
+  - type: Documentation
+    url: https://github.com/lasso-security/mcp-gateway
+  - type: Documentation
+    url: >-
+      https://www.lasso.security/resources/lasso-releases-first-open-source-security-gateway-for-mcp
+- aid: lasso-security:lasso-security-masking-api
+  name: Lasso Security Masking API
+  description: The Masking API from Lasso Security — 1 operation(s) for masking.
   humanURL: https://www.lasso.security/platform/lasso-for-applications
   baseURL: https://server.lasso.security/gateway/v3
-  properties:
-  - url: https://www.lasso.security/platform/lasso-for-applications
-    type: Documentation
-  - url: https://docs.litellm.ai/docs/proxy/guardrails/lasso_security
-    type: APIReference
-  - url: openapi/lasso-security-openapi.yml
-    type: OpenAPI
-  - url: collections/lasso-security.postman_collection.json
-    type: PostmanCollection
-  - url: collections/lasso-security.opencollection.json
-    type: OpenCollection
-  description: REST API that classifies LLM prompts and completions for security violations -
-    prompt injection, jailbreaks, harmful content, custom policies, and PII - via POST
-    /classify, returning structured deputy findings with BLOCK / WARN / AUTO_MASKING
-    action levels and severity. POST /classifix additionally returns PII-masked messages.
-- aid: lasso-security:llm-gateway-deputy
-  name: Lasso LLM Gateway (Deputy)
   tags:
-  - Gateway
-  - Deputy
-  - LLM Firewall
-  - Runtime Protection
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.lasso.security/platform/lasso-for-applications
-  baseURL: https://server.lasso.security/gateway/v3
+  - Masking
   properties:
-  - url: https://www.lasso.security/platform/lasso-for-applications
-    type: Documentation
-  - url: openapi/lasso-security-openapi.yml
-    type: OpenAPI
-  description: Runtime LLM firewall / gateway powered by Lasso Intent Deputies that inspects
-    every prompt and response at the intent layer - decoding obfuscation techniques and
-    detecting prompt injection, goal manipulation, and data leakage. Deployed in front of
-    LLM applications via Gateway, API, or SDK and backed by the same /classify scoring engine.
-- aid: lasso-security:mcp-gateway
-  name: Lasso MCP Gateway
-  tags:
-  - MCP
-  - Gateway
-  - Security Scanner
-  - Open Source
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://github.com/lasso-security/mcp-gateway
-  baseURL: https://server.lasso.security/gateway/v3
-  properties:
-  - url: https://github.com/lasso-security/mcp-gateway
-    type: Documentation
-  - url: https://www.lasso.security/resources/lasso-releases-first-open-source-security-gateway-for-mcp
-    type: Documentation
-  - url: openapi/lasso-security-openapi.yml
-    type: OpenAPI
-  description: Open-source (MIT, Python) plugin-based gateway that proxies and orchestrates
-    Model Context Protocol (MCP) servers, intercepting requests and responses to mask secrets
-    and PII, block prompt injection, scan server reputation, and enforce custom policies via
-    the Lasso v3 classify API using a LASSO_API_KEY.
+  - type: OpenAPI
+    url: openapi/lasso-security-masking-api-openapi.yml
+  - type: Documentation
+    url: https://www.lasso.security/platform/lasso-for-applications
+  - type: APIReference
+    url: https://docs.litellm.ai/docs/proxy/guardrails/lasso_security
+  - type: PostmanCollection
+    url: collections/lasso-security.postman_collection.json
+  - type: OpenCollection
+    url: collections/lasso-security.opencollection.json
+  - type: Documentation
+    url: https://github.com/lasso-security/mcp-gateway
+  - type: Documentation
+    url: >-
+      https://www.lasso.security/resources/lasso-releases-first-open-source-security-gateway-for-mcp
 common:
 - type: AgenticAccess
   url: agentic-access/lasso-security-agentic-access.yml
