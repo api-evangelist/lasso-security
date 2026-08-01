@@ -1,0 +1,16 @@
+{
+  "provider": "lasso-security",
+  "sources": [
+    "lasso-security-classify-api-openapi.yml",
+    "lasso-security-masking-api-openapi.yml"
+  ],
+  "outputs": [
+    "lasso-security-classify-api-openapi.yml",
+    "lasso-security-masking-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
