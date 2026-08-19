@@ -30,7 +30,7 @@ tags:
 - MCP
 created: '2026-06-20'
 modified: '2026-06-20'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: lasso-security:lasso-security-classify-api
   name: Lasso Security Classify API
