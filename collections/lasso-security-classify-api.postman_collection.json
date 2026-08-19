@@ -1,0 +1,649 @@
+{
+  "item": [
+    {
+      "id": "31828085-0298-468e-ab3b-66043cf69e39",
+      "name": "Classify",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2a6366eb-c033-4d97-8d93-444989073b3a",
+          "name": "Classify messages for security violations.",
+          "request": {
+            "name": "Classify messages for security violations.",
+            "description": {
+              "content": "Submit an array of chat messages (a prompt or a completion) for real-time security classification. Returns whether violations were detected along with per-deputy findings and action levels.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optional end-user identifier for tracking and attribution.",
+                "key": "lasso-user-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "ULID grouping related calls within one conversation/session.",
+                "key": "lasso-conversation-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"messageType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"tools\": [\n    {\n      \"key_0\": 5235.274525505223,\n      \"key_1\": \"string\"\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 3488.650736021791,\n      \"key_2\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7aa54076-2d67-442b-9e51-b3f4b8b24280",
+              "name": "Classification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "lasso-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional end-user identifier for tracking and attribution.",
+                    "key": "lasso-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ULID grouping related calls within one conversation/session.",
+                    "key": "lasso-conversation-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"messageType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"tools\": [\n    {\n      \"key_0\": 2027.9387058531984,\n      \"key_1\": 8991\n    },\n    {\n      \"key_0\": true,\n      \"key_1\": 6267.392851401631\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"violations_detected\": true,\n  \"deputies\": {\n    \"key_0\": true,\n    \"key_1\": false\n  },\n  \"findings\": {\n    \"key_0\": [\n      {\n        \"name\": \"string\",\n        \"category\": \"string\",\n        \"action\": \"BLOCK\",\n        \"severity\": \"HIGH\"\n      },\n      {\n        \"name\": \"string\",\n        \"category\": \"string\",\n        \"action\": \"WARN\",\n        \"severity\": \"MEDIUM\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"name\": \"string\",\n        \"category\": \"string\",\n        \"action\": \"BLOCK\",\n        \"severity\": \"MEDIUM\"\n      },\n      {\n        \"name\": \"string\",\n        \"category\": \"string\",\n        \"action\": \"WARN\",\n        \"severity\": \"LOW\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdb35878-0fed-4eaf-8e80-f42113f47953",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "lasso-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional end-user identifier for tracking and attribution.",
+                    "key": "lasso-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ULID grouping related calls within one conversation/session.",
+                    "key": "lasso-conversation-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"messageType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"tools\": [\n    {\n      \"key_0\": 2027.9387058531984,\n      \"key_1\": 8991\n    },\n    {\n      \"key_0\": true,\n      \"key_1\": 6267.392851401631\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b38d62d-9598-40ff-96da-aa802dbfb91d",
+              "name": "Invalid request payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "lasso-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional end-user identifier for tracking and attribution.",
+                    "key": "lasso-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ULID grouping related calls within one conversation/session.",
+                    "key": "lasso-conversation-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"messageType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"tools\": [\n    {\n      \"key_0\": 2027.9387058531984,\n      \"key_1\": 8991\n    },\n    {\n      \"key_0\": true,\n      \"key_1\": 6267.392851401631\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "20db2c32-35d8-4388-a06e-80f1f273d2d6",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "lasso-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional end-user identifier for tracking and attribution.",
+                    "key": "lasso-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ULID grouping related calls within one conversation/session.",
+                    "key": "lasso-conversation-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"messageType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"tools\": [\n    {\n      \"key_0\": 2027.9387058531984,\n      \"key_1\": 8991\n    },\n    {\n      \"key_0\": true,\n      \"key_1\": 6267.392851401631\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "226dd8b0-141f-47e6-acdc-65be47465424",
+          "name": "Classify messages and return PII-masked content.",
+          "request": {
+            "name": "Classify messages and return PII-masked content.",
+            "description": {
+              "content": "Behaves like /classify but, when violations such as PII are detected and masking is enabled, also returns a masked copy of the input messages with sensitive values (emails, phone numbers, secrets, etc.) replaced by placeholders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classifix"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optional end-user identifier for tracking and attribution.",
+                "key": "lasso-user-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "ULID grouping related calls within one conversation/session.",
+                "key": "lasso-conversation-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"messageType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"tools\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": true\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3ef21ac9-bda5-4d67-9c85-54b190be1b06",
+              "name": "Classification result with masked messages.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifix"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "lasso-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional end-user identifier for tracking and attribution.",
+                    "key": "lasso-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ULID grouping related calls within one conversation/session.",
+                    "key": "lasso-conversation-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"messageType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"tools\": [\n    {\n      \"key_0\": 2027.9387058531984,\n      \"key_1\": 8991\n    },\n    {\n      \"key_0\": true,\n      \"key_1\": 6267.392851401631\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"violations_detected\": false,\n  \"deputies\": {\n    \"key_0\": false,\n    \"key_1\": true\n  },\n  \"findings\": {\n    \"key_0\": [\n      {\n        \"name\": \"string\",\n        \"category\": \"string\",\n        \"action\": \"AUTO_MASKING\",\n        \"severity\": \"HIGH\"\n      },\n      {\n        \"name\": \"string\",\n        \"category\": \"string\",\n        \"action\": \"WARN\",\n        \"severity\": \"MEDIUM\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"name\": \"string\",\n        \"category\": \"string\",\n        \"action\": \"WARN\",\n        \"severity\": \"LOW\"\n      },\n      {\n        \"name\": \"string\",\n        \"category\": \"string\",\n        \"action\": \"WARN\",\n        \"severity\": \"HIGH\"\n      }\n    ]\n  },\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b283b566-a3d6-4127-b7f6-056e9c76f862",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifix"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "lasso-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional end-user identifier for tracking and attribution.",
+                    "key": "lasso-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ULID grouping related calls within one conversation/session.",
+                    "key": "lasso-conversation-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"messageType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"tools\": [\n    {\n      \"key_0\": 2027.9387058531984,\n      \"key_1\": 8991\n    },\n    {\n      \"key_0\": true,\n      \"key_1\": 6267.392851401631\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "39bdc8ae-4c3f-41ac-9df7-3c61efc3a453",
+              "name": "Invalid request payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifix"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "lasso-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional end-user identifier for tracking and attribution.",
+                    "key": "lasso-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ULID grouping related calls within one conversation/session.",
+                    "key": "lasso-conversation-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"messageType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"tools\": [\n    {\n      \"key_0\": 2027.9387058531984,\n      \"key_1\": 8991\n    },\n    {\n      \"key_0\": true,\n      \"key_1\": 6267.392851401631\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5d5e96b3-1aa7-4199-979d-abbf8c3c221d",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifix"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "lasso-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional end-user identifier for tracking and attribution.",
+                    "key": "lasso-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ULID grouping related calls within one conversation/session.",
+                    "key": "lasso-conversation-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"messageType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"tools\": [\n    {\n      \"key_0\": 2027.9387058531984,\n      \"key_1\": 8991\n    },\n    {\n      \"key_0\": true,\n      \"key_1\": 6267.392851401631\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://server.lasso.security/gateway/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "lasso-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f924c668-1394-4158-b084-0ae4012bf98f",
+    "name": "Lasso Security / Threat Detection Classify API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Lasso Security's GenAI guardrails. The Classify endpoint scores LLM prompts and completions for security violations - prompt injection, jailbreaks, harmful content, custom policies, and PII - and returns structured findings (\"deputies\") with action levels (BLOCK, WARN, AUTO_MASKING) and severity. The Classifix endpoint additionally returns PII-masked messages. Endpoints and field names are derived from public integrations (LiteLLM, Portkey) and the open-source Lasso MCP Gateway; consult Lasso for the authoritative reference.\n\nContact Support:\n Name: Lasso Security",
+      "type": "text/plain"
+    }
+  }
+}

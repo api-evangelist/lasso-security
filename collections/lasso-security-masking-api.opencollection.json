@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lasso Security / Threat Detection Classify Masking API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "lasso-api-key",
+      "value": "{{lasso-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Masking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Classify messages and return PII-masked content.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://server.lasso.security/gateway/v3/classifix",
+            "headers": [
+              {
+                "name": "lasso-user-id",
+                "value": ""
+              },
+              {
+                "name": "lasso-conversation-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Behaves like /classify but, when violations such as PII are detected and masking is enabled, also returns a masked copy of the input messages with sensitive values (emails, phone numbers, secrets, etc.) replaced by placeholders."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
