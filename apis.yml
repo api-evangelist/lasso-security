@@ -62,29 +62,6 @@ apis:
   - type: Documentation
     url: >-
       https://www.lasso.security/resources/lasso-releases-first-open-source-security-gateway-for-mcp
-- aid: lasso-security:lasso-security-masking-api
-  name: Lasso Security Masking API
-  description: The Masking API from Lasso Security — 1 operation(s) for masking.
-  humanURL: https://www.lasso.security/platform/lasso-for-applications
-  baseURL: https://server.lasso.security/gateway/v3
-  tags:
-  - Masking
-  properties:
-  - type: OpenAPI
-    url: openapi/lasso-security-masking-api-openapi.yml
-  - type: Documentation
-    url: https://www.lasso.security/platform/lasso-for-applications
-  - type: APIReference
-    url: https://docs.litellm.ai/docs/proxy/guardrails/lasso_security
-  - type: PostmanCollection
-    url: collections/lasso-security.postman_collection.json
-  - type: OpenCollection
-    url: collections/lasso-security.opencollection.json
-  - type: Documentation
-    url: https://github.com/lasso-security/mcp-gateway
-  - type: Documentation
-    url: >-
-      https://www.lasso.security/resources/lasso-releases-first-open-source-security-gateway-for-mcp
 common:
 - type: AgenticAccess
   url: agentic-access/lasso-security-agentic-access.yml
