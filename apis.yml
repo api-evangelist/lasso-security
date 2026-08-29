@@ -7,6 +7,18 @@ description: Lasso Security is a GenAI security platform that protects every LLM
   and the Classify / Threat Detection API scores prompts and completions for prompt
   injection, jailbreaks, PII, and harmful content, returning structured BLOCK / WARN
   / AUTO_MASKING findings.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
