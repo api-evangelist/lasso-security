@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Lasso Security / Threat Detection Classify API
-  description: REST API for Lasso Security's GenAI guardrails. The Classify endpoint scores LLM prompts and completions for security violations - prompt injection, jailbreaks, harmful content, custom policies, and PII - and returns structured findings ("deputies") with action levels (BLOCK, WARN, AUTO_MASKING) and severity. The Classifix endpoint additionally returns PII-masked messages. Endpoints and field names are derived from public integrations (LiteLLM, Portkey) and the open-source Lasso MCP Gateway; consult Lasso for the authoritative reference.
+  description: REST API for Lasso Security's GenAI guardrails.
   termsOfService: https://www.lasso.security/
   contact:
     name: Lasso Security
@@ -20,7 +20,7 @@ paths:
       operationId: classify
       tags:
       - Classify
-      summary: Classify messages for security violations.
+      summary: Classify messages for security violations
       description: Submit an array of chat messages (a prompt or a completion) for real-time security classification. Returns whether violations were detected along with per-deputy findings and action levels.
       parameters:
       - name: lasso-user-id
@@ -59,7 +59,7 @@ paths:
       operationId: classifix
       tags:
       - Classify
-      summary: Classify messages and return PII-masked content.
+      summary: Classify messages and return PII-masked content
       description: Behaves like /classify but, when violations such as PII are detected and masking is enabled, also returns a masked copy of the input messages with sensitive values (emails, phone numbers, secrets, etc.) replaced by placeholders.
       parameters:
       - name: lasso-user-id
@@ -95,6 +95,24 @@ paths:
           description: Rate limit exceeded.
 components:
   schemas:
+    ClassifyResponse:
+      type: object
+      properties:
+        violations_detected:
+          type: boolean
+          description: True if one or more violations were detected.
+        deputies:
+          type: object
+          description: Map of deputy (detector) name to a boolean indicating whether that deputy fired - e.g. jailbreak, custom-policies, sexual, hate, illegality, codetect, violence, pattern-detection.
+          additionalProperties:
+            type: boolean
+        findings:
+          type: object
+          description: Map of deputy name to an array of structured findings.
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Finding'
     Message:
       type: object
       required:
@@ -112,6 +130,39 @@ components:
         content:
           type: string
           description: Message text to be classified.
+    Finding:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the specific finding.
+        category:
+          type: string
+          description: High-level category of the finding (e.g., SAFETY).
+        action:
+          type: string
+          description: Recommended enforcement action.
+          enum:
+          - BLOCK
+          - WARN
+          - AUTO_MASKING
+        severity:
+          type: string
+          description: Severity of the finding.
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+    ClassifixResponse:
+      allOf:
+      - $ref: '#/components/schemas/ClassifyResponse'
+      - type: object
+        properties:
+          messages:
+            type: array
+            description: Masked copy of the input messages with PII / sensitive values replaced by placeholders (present when masking applied).
+            items:
+              $ref: '#/components/schemas/Message'
     ClassifyRequest:
       type: object
       required:
@@ -140,57 +191,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    ClassifyResponse:
-      type: object
-      properties:
-        violations_detected:
-          type: boolean
-          description: True if one or more violations were detected.
-        deputies:
-          type: object
-          description: Map of deputy (detector) name to a boolean indicating whether that deputy fired - e.g. jailbreak, custom-policies, sexual, hate, illegality, codetect, violence, pattern-detection.
-          additionalProperties:
-            type: boolean
-        findings:
-          type: object
-          description: Map of deputy name to an array of structured findings.
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/Finding'
-    ClassifixResponse:
-      allOf:
-      - $ref: '#/components/schemas/ClassifyResponse'
-      - type: object
-        properties:
-          messages:
-            type: array
-            description: Masked copy of the input messages with PII / sensitive values replaced by placeholders (present when masking applied).
-            items:
-              $ref: '#/components/schemas/Message'
-    Finding:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the specific finding.
-        category:
-          type: string
-          description: High-level category of the finding (e.g., SAFETY).
-        action:
-          type: string
-          description: Recommended enforcement action.
-          enum:
-          - BLOCK
-          - WARN
-          - AUTO_MASKING
-        severity:
-          type: string
-          description: Severity of the finding.
-          enum:
-          - LOW
-          - MEDIUM
-          - HIGH
   securitySchemes:
     LassoApiKey:
       type: apiKey
