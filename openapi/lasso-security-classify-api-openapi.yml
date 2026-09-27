@@ -95,6 +95,34 @@ paths:
           description: Rate limit exceeded.
 components:
   schemas:
+    ClassifyRequest:
+      type: object
+      required:
+      - messages
+      properties:
+        messages:
+          type: array
+          description: Ordered array of chat messages to classify.
+          items:
+            $ref: '#/components/schemas/Message'
+        messageType:
+          type: string
+          description: Whether the payload represents a prompt or a completion.
+          enum:
+          - PROMPT
+          - COMPLETION
+        userId:
+          type: string
+          description: Optional end-user identifier.
+        sessionId:
+          type: string
+          description: Conversation/session identifier (ULID).
+        tools:
+          type: array
+          description: Optional tool / function definitions associated with the request.
+          items:
+            type: object
+            additionalProperties: true
     ClassifyResponse:
       type: object
       properties:
@@ -113,23 +141,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Finding'
-    Message:
-      type: object
-      required:
-      - role
-      - content
-      properties:
-        role:
-          type: string
-          description: Role of the message author.
-          enum:
-          - system
-          - user
-          - assistant
-          - tool
-        content:
-          type: string
-          description: Message text to be classified.
     Finding:
       type: object
       properties:
@@ -163,34 +174,23 @@ components:
             description: Masked copy of the input messages with PII / sensitive values replaced by placeholders (present when masking applied).
             items:
               $ref: '#/components/schemas/Message'
-    ClassifyRequest:
+    Message:
       type: object
       required:
-      - messages
+      - role
+      - content
       properties:
-        messages:
-          type: array
-          description: Ordered array of chat messages to classify.
-          items:
-            $ref: '#/components/schemas/Message'
-        messageType:
+        role:
           type: string
-          description: Whether the payload represents a prompt or a completion.
+          description: Role of the message author.
           enum:
-          - PROMPT
-          - COMPLETION
-        userId:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
           type: string
-          description: Optional end-user identifier.
-        sessionId:
-          type: string
-          description: Conversation/session identifier (ULID).
-        tools:
-          type: array
-          description: Optional tool / function definitions associated with the request.
-          items:
-            type: object
-            additionalProperties: true
+          description: Message text to be classified.
   securitySchemes:
     LassoApiKey:
       type: apiKey
