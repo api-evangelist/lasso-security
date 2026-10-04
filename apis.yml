@@ -76,6 +76,9 @@ apis:
     url: >-
       https://www.lasso.security/resources/lasso-releases-first-open-source-security-gateway-for-mcp
 common:
+- type: CapabilityMap
+  url: capabilities/lasso-security-capability-edges.yml
+  name: Lasso Security Business Capability Map
 - type: AgenticAccess
   url: agentic-access/lasso-security-agentic-access.yml
 - type: DomainSecurity
