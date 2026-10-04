@@ -95,24 +95,6 @@ paths:
           description: Rate limit exceeded.
 components:
   schemas:
-    ClassifyResponse:
-      type: object
-      properties:
-        violations_detected:
-          type: boolean
-          description: True if one or more violations were detected.
-        deputies:
-          type: object
-          description: Map of deputy (detector) name to a boolean indicating whether that deputy fired - e.g. jailbreak, custom-policies, sexual, hate, illegality, codetect, violence, pattern-detection.
-          additionalProperties:
-            type: boolean
-        findings:
-          type: object
-          description: Map of deputy name to an array of structured findings.
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/Finding'
     ClassifyRequest:
       type: object
       required:
@@ -141,6 +123,29 @@ components:
           items:
             type: object
             additionalProperties: true
+    Finding:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the specific finding.
+        category:
+          type: string
+          description: High-level category of the finding (e.g., SAFETY).
+        action:
+          type: string
+          description: Recommended enforcement action.
+          enum:
+          - BLOCK
+          - WARN
+          - AUTO_MASKING
+        severity:
+          type: string
+          description: Severity of the finding.
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
     Message:
       type: object
       required:
@@ -168,29 +173,24 @@ components:
             description: Masked copy of the input messages with PII / sensitive values replaced by placeholders (present when masking applied).
             items:
               $ref: '#/components/schemas/Message'
-    Finding:
+    ClassifyResponse:
       type: object
       properties:
-        name:
-          type: string
-          description: Name of the specific finding.
-        category:
-          type: string
-          description: High-level category of the finding (e.g., SAFETY).
-        action:
-          type: string
-          description: Recommended enforcement action.
-          enum:
-          - BLOCK
-          - WARN
-          - AUTO_MASKING
-        severity:
-          type: string
-          description: Severity of the finding.
-          enum:
-          - LOW
-          - MEDIUM
-          - HIGH
+        violations_detected:
+          type: boolean
+          description: True if one or more violations were detected.
+        deputies:
+          type: object
+          description: Map of deputy (detector) name to a boolean indicating whether that deputy fired - e.g. jailbreak, custom-policies, sexual, hate, illegality, codetect, violence, pattern-detection.
+          additionalProperties:
+            type: boolean
+        findings:
+          type: object
+          description: Map of deputy name to an array of structured findings.
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Finding'
   securitySchemes:
     LassoApiKey:
       type: apiKey
