@@ -1,4 +1,4 @@
-# Lasso Security (lasso-security)
+# Lasso Security
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,100 +66,125 @@
 
 Lasso Security is a GenAI security platform that protects every LLM and AI agent touchpoint. Its Deputy gateway inspects LLM and MCP traffic in real time, and the Classify / Threat Detection API scores prompts and completions for prompt injection, jailbreaks, PII, and harmful content, returning structured BLOCK / WARN / AUTO_MASKING findings.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/lasso-security/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/lasso-security/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · LLM · GenAI Security · Prompt Injection · Guardrails · MCP
 
-## Tags
+## Lasso Security on APIs.io
 
-- AI
-- LLM
-- GenAI Security
-- Prompt Injection
-- Guardrails
-- MCP
+Everything profiled for Lasso Security is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/lasso-security/](https://apis.io/providers/lasso-security/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (1)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Lasso Security Classify API](https://apis.io/apis/lasso-security/lasso-security-classify-api/) — The Classify API from Lasso Security — 2 operation(s) for classify.
 
-## APIs
+### Published properties
 
-### Lasso Classify / Threat Detection API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-REST API that classifies LLM prompts and completions for security violations - prompt injection, jailbreaks, harmful content, custom policies, and PII - via POST /classify, returning structured deputy findings with BLOCK / WARN / AUTO_MASKING action levels and severity. POST /classifix additionally returns PII-masked messages.
+#### MCP servers (1)
 
-- **Human URL:** [https://www.lasso.security/platform/lasso-for-applications](https://www.lasso.security/platform/lasso-for-applications)
-- **Base URL:** `https://server.lasso.security/gateway/v3`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [lasso-security](https://apis.io/servers/lasso-security/lasso-security/)
 
-- Classify
-- Threat Detection
-- Guardrails
-- PII
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://www.lasso.security/platform/lasso-for-applications)
-- [API Reference](https://docs.litellm.ai/docs/proxy/guardrails/lasso_security)
-- [OpenAPI](openapi/lasso-security-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/lasso-security.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/lasso-security.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Lasso Security Agentic Access](https://apis.io/agentic-access/lasso-security/lasso-security-agentic-access/)
 
-### Lasso LLM Gateway (Deputy)
+#### Collections (3)
 
-Runtime LLM firewall / gateway powered by Lasso Intent Deputies that inspects every prompt and response at the intent layer - decoding obfuscation techniques and detecting prompt injection, goal manipulation, and data leakage. Deployed in front of LLM applications via Gateway, API, or SDK and backed by the same /classify scoring engine.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://www.lasso.security/platform/lasso-for-applications](https://www.lasso.security/platform/lasso-for-applications)
-- **Base URL:** `https://server.lasso.security/gateway/v3`
+- [Lasso Security Classify / Threat Detection API](https://apis.io/collections/lasso-security/open-lasso-security/)
+- [Lasso Security / Threat Detection Classify API](https://apis.io/collections/lasso-security/open-lasso-security-classify-api/)
+- [Lasso Security / Threat Detection Classify Masking API](https://apis.io/collections/lasso-security/open-lasso-security-masking-api/)
 
-#### Tags
+#### Security (2)
 
-- Gateway
-- Deputy
-- LLM Firewall
-- Runtime Protection
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Lasso Security Authentication](https://apis.io/security/lasso-security/lasso-security-authentication/)
+- [Lasso Security Domain Security](https://apis.io/security/lasso-security/lasso-security-domain-security/)
 
-- [Documentation](https://www.lasso.security/platform/lasso-for-applications)
-- [OpenAPI](openapi/lasso-security-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/lasso-security.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/lasso-security.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### Lasso MCP Gateway
+Published plans, tiers and prices.
 
-Open-source (MIT, Python) plugin-based gateway that proxies and orchestrates Model Context Protocol (MCP) servers, intercepting requests and responses to mask secrets and PII, block prompt injection, scan server reputation, and enforce custom policies via the Lasso v3 classify API using a LASSO_API_KEY.
+- [Lasso Security Plans Pricing](https://apis.io/plans/lasso-security/lasso-security-plans-pricing/)
 
-- **Human URL:** [https://github.com/lasso-security/mcp-gateway](https://github.com/lasso-security/mcp-gateway)
-- **Base URL:** `https://server.lasso.security/gateway/v3`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- MCP
-- Gateway
-- Security Scanner
-- Open Source
+- [Lasso Security Rate Limits](https://apis.io/rate-limits/lasso-security/lasso-security-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://github.com/lasso-security/mcp-gateway)
-- [Documentation](https://www.lasso.security/resources/lasso-releases-first-open-source-security-gateway-for-mcp)
-- [OpenAPI](openapi/lasso-security-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/lasso-security.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/lasso-security.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-## Common Properties
+- [Lasso Security Finops](https://apis.io/finops/lasso-security/lasso-security-finops/)
 
-- [GitHub Organization](https://github.com/lasso-security)
-- [LinkedIn](https://www.linkedin.com/company/lasso-security)
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.lasso.security/)
 - [Documentation](https://www.lasso.security/platform/lasso-for-applications)
-- [Plans](plans/lasso-security-plans-pricing.yml)
-- [Rate Limits](rate-limits/lasso-security-rate-limits.yml)
-- [Fin Ops](finops/lasso-security-finops.yml)
+- [Blog](https://www.lasso.security/blog)
+- [GitHub](https://github.com/lasso-security)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 21.5** — emerging · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 24.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 35.2 |
+| Access clarity | 7.9 |
+
+**Agent readiness 30.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 10.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/lasso-security/](https://apis.io/providers/lasso-security/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Lasso Security: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/lasso-security/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
